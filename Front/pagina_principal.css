@@ -1,0 +1,100 @@
+/* Redefina estilos padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container do cabeçalho */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  position: relative; /* Adicionado para permitir o posicionamento absoluto da imagem */
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center; /* Center items vertically within the header */
+  justify-content: center; /* Center the header horizontally */
+  margin-top: 10px;
+}
+
+/* Logo */
+header img {
+  width: auto;
+  max-height: 80px; /* Limit the maximum height of the logo */
+  position: absolute; /* A imagem agora é posicionada em relação ao contêiner do cabeçalho */
+  left: 20px; /* Ajuste este valor para mover a imagem para a esquerda ou direita */
+}
+
+/* Escola Octógono */
+header h1 {
+  flex: 1;
+  font-size: 3em;
+  font-weight: bold; /* Adicionado para aumentar a espessura da fonte */
+}
+
+/* Container principal */
+.container-flex {
+  align-items: center; /* Adicionado para centralizar os itens verticalmente */
+  flex-direction: row /* Alinha os itens horizontalmente */
+}
+
+/* Dados do usuário */
+.dados-usuario {
+  display: flex;
+  flex-direction: column; /* Empilha os itens verticalmente */
+  align-items: flex-start;
+  margin-top: 20px; /* Ajuste a margem superior conforme necessário */
+  margin-left: 20px; /* Ajuste a margem esquerda conforme necessário */
+}
+
+.foto-usuario {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px; /* Ajuste a margem direita conforme necessário */
+}
+
+.foto-usuario img {
+  width: 100%;
+  height: 100%;
+}
+
+.informacoes-usuario {
+  text-align: right;
+}
+
+.informacoes-usuario h3,
+.informacoes-usuario h5 {
+  margin: 5px 0; /* Adicione espaço entre os elementos */
+}
+
+/* Menu container */
+.menu-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -100px; /* Adjust margin top as needed */
+  }
+  
+  /* Menu de navegação */
+  .menu-navegacao nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu-navegacao nav ul li {
+    margin-right: 10px; /* Adjust margin between menu items as needed */
+  }
+  
+  .menu-navegacao nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1em;
+    padding: 10px 20px;
+  }

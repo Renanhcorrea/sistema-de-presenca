@@ -4,22 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escola Octógono</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="pagina_principal.css" />
   </head>
   <body>
-    <header>
-      <h1>Escola Octógono</h1>
-      <img src="logo.png" alt="Logotipo da Escola Octógono" />
-    </header>
-    <main>
-      <section class="links">
-        <h2>Links Úteis</h2>
-        <ul>
-          <li><a href="registrar_presenca.html">Registrar Presença</a></li>
-          <li><a href="relatorio_geral.html">Relatório Geral</a></li>
-          <li><a href="relatorio_aluno.html">Relatório Aluno</a></li>
-        </ul>
-      </section>
-    </main>
+    <div class="header-container">
+      <header>
+        <img src="octogono.png" alt="Logotipo da Escola Octógono" />
+        <h1>Escola Octógono</h1>
+      </header>
+    </div>
+
+    <div class="container-flex">
+      <div class="dados-usuario">
+        <div class="foto-usuario">
+          <img src="professor.png" alt="Foto do Usuário" />
+        </div>
+        <div class="informacoes-usuario">
+          <h3>Cleidinéia dos Anjos</h3>
+          <h5>Professor(a)</h5>
+          <h5>3° Ano</h5>
+        </div>
+      </div>
+
+      <div class="menu-container">
+        <div class="menu-navegacao">
+          <nav>
+            <ul>
+              <li><a href="registrar_presenca.html">Registrar Presença</a></li>
+              <li><a href="relatorio_geral.html">Relatório Geral</a></li>
+              <li><a href="relatorio_aluno.html">Relatório Aluno</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

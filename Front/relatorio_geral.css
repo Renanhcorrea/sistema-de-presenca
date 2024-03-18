@@ -1,0 +1,14 @@
+.botao-voltar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.botao-voltar:hover {
+  background-color: #f00;
+}
