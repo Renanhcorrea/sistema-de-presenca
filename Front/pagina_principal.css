@@ -7,18 +7,18 @@
 
 /*Estilo base*/
 
-/* Header */
 .body{
   height: 100vh;
 }
 
+/* Header */
 .header-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(36, 84, 20, 1);
   width: 100%;
-  max-height: 180px;
+  max-height: fit-content;
   position: relative;
   padding-top: 5px;
   padding-bottom: 10px;
@@ -40,7 +40,7 @@ header h1{
 /*main*/
 main{
   display: block;
-  height: 100% - 180px;
+  height: 100%;
 }
 
 /* Sidebar*/
