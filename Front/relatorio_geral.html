@@ -3,19 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escola Octogono - Registrar Presença</title>
+    <title>Escola Octógono - Relatório Geral</title>
     <link rel="stylesheet" href="relatorio_geral.css" />
   </head>
   <body>
-    <header>
-      <h1>Escola Octogono</h1>
-    </header>
+    <div class="header-container"><a href="pagina_principal.html">
+      <header>
+        <img src="logo_branco-trbg.png" alt="Logotipo da Escola Octógono" />
+        <h1>Sistema de Registro de Presença</h1>
+      </header>
+    </a></div>
+
     <main>
       <h2>Relatório Geral</h2>
-      <p>blablabla</p>
-      <div class="botao-voltar">
-        <a href="pagina_principal.html">Voltar para Página Principal</a>
-      </div>
+      <form class="filters">
+      <p>Selecione os filtros desejados:</p>
+      <form action="#" method="GET">
+        <div>
+          <label for="data-inicial">Data Inicial:</label>
+          <input type="date" id="data-inicial" name="data-inicial" required>
+        </div>
+    
+        <div>
+          <label for="data-final">Data Final:</label>
+          <input type="date" id="data-final" name="data-final" required>
+        </div>
+    
+        <div>
+          <label for="turma">Turma:</label>
+          <select id="turma" name="turma" required>
+            <option value="">Selecione uma turma</option>
+            <option value="turma1">Turma 1</option>
+            <option value="turma2">Turma 2</option>
+            <option value="turma3">Turma 3</option>
+          </select>
+        </div>
+    
+        <div>
+          <label for="disciplina">Disciplina:</label>
+          <select id="disciplina" name="disciplina" required>
+            <option value="">Selecione uma disciplina</option>
+            <option value="matematica">Matemática</option>
+            <option value="portugues">Português</option>
+            <option value="ciencias">Ciências</option>
+          </select>
+        </div>
+    
+        <button type="submit">Filtrar</button>
+      </form>
     </main>
   </body>
 </html>
