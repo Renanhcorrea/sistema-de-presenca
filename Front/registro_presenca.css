@@ -52,10 +52,6 @@
     font-size: 24px;
   }
 
-  a{
-    width: fit-content;
-  }
-
   button {
     align-items: center;
     background-color: #FFFFFF;
@@ -80,7 +76,7 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: baseline;
-    width: 100%;
+    width: 50%;
     margin-top: 2vh;
   }
   
@@ -102,7 +98,7 @@
     color: rgba(36, 84, 20, 1);
     transform: translateY(0);
   }
-
+  
   /*mobile*/
   @media only screen and (max-width: 768px) {
       /*header*/
