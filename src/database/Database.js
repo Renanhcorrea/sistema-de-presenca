@@ -7,11 +7,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-const db = mysql.createConnection ({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '1020304050Squad',
-    database: 'mysql'
+    database: 'mysql',
+    insecureAuth: true
 });
 
 db.connect((err) => {
