@@ -1,3 +1,19 @@
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize("db_aluno", "root", "10203040Squad", {
+    host: 'localhost',
+    dialect: 'mysql'
+});
+
+sequelize.authenticate().then(function(){
+    console.log('Database Connected.');
+}).catch(function(){
+    console.log('error.');
+});
+
+module.exports = sequelize;
+
+/*
 const express = require ('express');
 const bodyParser = require ('body-parser');
 const mysql = require ('mysql');
@@ -41,3 +57,4 @@ app.get('./models/aluno', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+*/
