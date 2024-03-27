@@ -7,4 +7,4 @@ const db_aluno = require('./database/Database');
 
 app.listen (PORT, () => {
     console.log(`App listeing on port ${PORT}`)
-});
+});  
