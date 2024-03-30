@@ -152,7 +152,7 @@ tmp
 pids
 logs
 
-node_modules
+node_modules/
 npm-debug.log
 benchmarks/results.json
 !test/fixtures/data.csv

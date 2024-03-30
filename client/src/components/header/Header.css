@@ -1,0 +1,24 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(36, 84, 20, 1);
+  width: 100%;
+  max-height: fit-content;
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+header {
+  text-align: center;
+}
+
+header img {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+header h1{
+  color: #F0F0F1;
+}

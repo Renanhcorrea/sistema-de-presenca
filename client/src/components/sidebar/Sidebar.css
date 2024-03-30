@@ -1,0 +1,65 @@
+.sidebar {
+  width: 100%;
+}
+
+.sidebar .dados-usuario {
+  background-color: rgba(124, 156, 116, 1);
+  height: 83vh;
+  padding: 20px 0;
+  font-weight: 500;
+}
+
+.informacoes-usuario {
+  display: block;
+  padding: 13px 30px;
+  color: rgb(241, 237, 237);
+  font-size: 17px;
+  position: relative;
+  text-align: center;
+}
+
+.dados-usuario img{
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar .dados-usuario {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 100%;
+    max-height: auto;
+    height: fit-content;
+    padding: 0;
+  }
+
+  .dados-usuario img{
+    display: none;
+  }
+
+  .informacoes-usuario{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding-left: 2%;
+  }
+
+  .informacoes-usuario *{
+    font-size: 14px;
+    align-self: flex-start;
+  }
+}
