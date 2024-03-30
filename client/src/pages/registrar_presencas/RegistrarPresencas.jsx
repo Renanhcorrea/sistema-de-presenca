@@ -62,14 +62,23 @@ export default function RegistrarPresencas() {
 
   // Função para marcar as presenças
   const marcarPresencas = () => {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox, index) => {
-      setPresenca(alunos[index].codAluno, selectedAula, checkbox.checked);
-      // retorno de mensagem de sucesso
-      alert('Presenças marcadas com sucesso!');
-    });
-  };
+     // Exibe a caixa de confirmação
+    const confirmacao = confirm('Deseja confirmar o envio das faltas e presenças marcadas?');
 
+      if (confirmacao) {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach((checkbox, index) => {
+        setPresenca(alunos[index].codAluno, selectedAula, checkbox.checked);
+      });
+      
+      // Exibe uma mensagem de sucesso e redireciona
+      alert('Presenças marcadas com sucesso!');
+      window.location.href = "/";
+    } else {
+      // Se o usuário não confirmar, apenas fecha a mensagem
+      // Não é necessário fazer mais nada aqui
+    }
+};
 
   return (
     <div className="registrar-presencas">
