@@ -22,3 +22,14 @@ header img {
 header h1{
   color: #F0F0F1;
 }
+
+a {
+  color: #0060B6;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#00A0C6; 
+  text-decoration:none; 
+  cursor:pointer;  
+}

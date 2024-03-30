@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // frameworks
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -35,10 +37,10 @@ app.listen(port, () => {
 });
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Cff7093621.',
-    database: 'escola_octogono',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     Promise: global.Promise,
     connectionLimit: 10 // maximum number of connections
 });
