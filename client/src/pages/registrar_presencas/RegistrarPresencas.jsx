@@ -12,8 +12,6 @@ export default function RegistrarPresencas() {
   const [alunos, setAlunos] = useState([]);
   // useState para armazenar a aula selecionada
   const [selectedAula, setSelectedAula] = useState('');
-  // useState para armazenar a lista de disciplinas
-  const [disciplinas, setDisciplinas] = useState([]);
 
   // useEffect para buscar a lista de aulas
   useEffect(() => {
@@ -25,17 +23,6 @@ export default function RegistrarPresencas() {
     };
 
     fetchAulasData();
-  }, []);
-
-  useEffect (() => {
-    const fetchDisciplinas = async () => {
-      const disciplinasData = await getDisciplinas();
-      if (disciplinasData) {
-        setDisciplinas(disciplinasData);
-      }
-    };
-
-    fetchDisciplinas();
   }, []);
 
   // useEffect para buscar a lista de alunos de acordo com a turma da aula selecionada
@@ -94,12 +81,9 @@ export default function RegistrarPresencas() {
             <select id="select-aula" className="ms-2 mb-3" onChange={handleAulaChange}>
               <option value="">Selecione uma aula</option>
               {aulas.map(aula => {
-                const disciplina = disciplinas.find(disciplina => disciplina.codDisciplina === aula.codDisciplina);
-                console.log("Aula:", aula);
-                console.log("Disciplina encontrada:", disciplina);
                 return (
                   <option key={aula.idAula} value={aula.idAula}>
-                    {`${disciplina.nomeDisciplina} - ${aula.horaInicio} às ${aula.horaFim} - ${aula.idTurma}`}
+                    {`${aula.nomeDisciplina} - ${aula.horaInicio} às ${aula.horaFim} - ${aula.anoTurma}${aula.codTurma}`}
                   </option>
                 );
               })}

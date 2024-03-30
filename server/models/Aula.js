@@ -23,7 +23,8 @@ const Aula = class {
     // get all classes by codProfessor
     static async getAulasByProfessor (conn, codProfessor) {
         try {
-            const [rows, fields] = await conn.execute("SELECT * FROM tb_aula WHERE codProfessor = ?", [codProfessor]);
+            const [rows, fields] = await conn.execute(
+                "SELECT idAula, dataAula, horaInicio, horaFim, codTurma, anoTurma, nomeDisciplina, codProfessor, a.idTurma AS idTurma, a.codDisciplina AS codDisciplina FROM tb_aula a INNER JOIN tb_turma t ON a.idTurma = t.idTurma INNER JOIN tb_disciplina d ON a.codDisciplina = d.codDisciplina WHERE codProfessor =  ? AND dataAula = CURDATE()", [codProfessor]);
             return rows;
         } catch (error) {
             console.error("Erro ao obter aulas:", error);
