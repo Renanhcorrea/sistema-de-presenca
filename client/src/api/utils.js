@@ -1,5 +1,7 @@
+require('dotenv').config()
+
 import axios from 'axios';
-const API_URL = 'http://localhost:3000';
+const API_URL = process.env.API_URL;
 const codProfessor = 'P002';
 
 export const getProfessor = async () => {
