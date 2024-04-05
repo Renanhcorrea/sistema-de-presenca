@@ -164,10 +164,24 @@ app.get('/professor-disciplina', async (req, res) => {
     }
 });
 
+// get all presencas
 app.get('/presencas', async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const result = await Presenca.getPresencas(conn);
+        conn.release();
+        res.send(result);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
+// get all presencas by codAluno
+app.get('/presencas/:codAluno', async (req, res) => {
+    try {
+        const conn = await pool.getConnection();
+        const result = await Presenca.getPresencasByAluno(conn, req.params.codAluno);
         conn.release();
         res.send(result);
     } catch (error) {

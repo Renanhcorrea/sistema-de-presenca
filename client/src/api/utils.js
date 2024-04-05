@@ -30,9 +30,37 @@ export const getAlunosByTurma = async (idTurma) => {
   }
 }
 
+export const getAlunos = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/alunos`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const getDisciplinas = async () => {
   try {
     const response = await axios.get(`${API_URL}/disciplinas`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const getPresencas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/presencas`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const getPresencasByAluno = async (codAluno) => {
+  try {
+    const response = await axios.get(`${API_URL}/presencas/${codAluno}`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
