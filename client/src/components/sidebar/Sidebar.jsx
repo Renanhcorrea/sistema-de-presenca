@@ -24,7 +24,7 @@ export default function Sidebar() {
           <h2>{professor.nome}</h2>
           <p>Professor(a)</p>
         </div>
-      </div>´
+      </div>
     </div>
   )
 }

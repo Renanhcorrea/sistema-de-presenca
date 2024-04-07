@@ -1,0 +1,43 @@
+.container-relatorio-aluno {
+    max-width: 88%; 
+  }
+  
+  main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: flex-start;
+    height: 80vh;
+    gap: 5vh;
+    margin-top: 2vh;
+    font-size: 18px;
+  }
+
+  .filtros{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5vh;
+    margin-top: 2vh;
+    font-size: 16px;
+  }
+
+  .table{
+    margin-top: 5vh;
+  }
+
+  table{
+    max-width: 95%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .filtros button{
+      flex-basis: 80%;
+      align-self: stretch;
+    }
+  }
+
+
+
+
+  

@@ -1,6 +1,7 @@
 import './Home.css';
 
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -22,9 +23,9 @@ export default function Home() {
         <Col md={10}>
           <div className="menu-navegacao">
               <ul>
-                <li><Link to={'/registrar-presencas'}><button>Registrar Presenças</button></Link></li>
-                <li><Link to={'/relatorio-geral'}><button>Gerar Relatório Geral</button></Link></li>
-                <li><Link to={'/relatorio-aluno'}><button>Gerar Relatório de Aluno</button></Link></li>
+                <li><Link to={'/registrar-presencas'}><Button variant="secondary">Registrar Presenças</Button></Link></li>
+                <li><Link to={'/relatorio-geral'}><Button variant="secondary">Gerar Relatório Geral</Button></Link></li>
+                <li><Link to={'/relatorio-aluno'}><Button variant="secondary">Gerar Relatório de Aluno</Button></Link></li>
               </ul>
           </div>
         </Col>
