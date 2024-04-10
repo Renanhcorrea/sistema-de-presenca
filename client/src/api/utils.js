@@ -12,6 +12,15 @@ export const getProfessor = async () => {
   }
 }
 
+export const getProfessores = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/professores`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const getAulasByProfessor = async () => {
   try {
     const response = await axios.get(`${API_URL}/aulas/professor/${codProfessor}`);
@@ -34,6 +43,15 @@ export const getAlunosByTurma = async (idTurma) => {
 export const getAlunos = async () => {
   try {
     const response = await axios.get(`${API_URL}/alunos`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const getTurmas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/turmas`);
     return response.data;
   } catch (error) {
     console.error(error);
