@@ -14,7 +14,7 @@ export default function RelatorioAluno() {
   const [showTable, setShowTable] = useState(false);
   const [relatorio, setRelatorio] = useState({}); // Adicionado estado para armazenar o relatório calculado
   const [errorMessage, setErrorMessage] = useState(''); // Estado para armazenar mensagens de erro
-
+  const [fontSize, setFontSize] = useState(16);
 
   useEffect(() => {
     const fetchAlunosData = async () => {
@@ -102,9 +102,11 @@ export default function RelatorioAluno() {
     return faltasPorDisciplinaProfessor;
   }
   
+  const increaseFontSize = () => setFontSize(fontSize + 1);
+  const decreaseFontSize = () => setFontSize(Math.max(fontSize - 1, 10));
 
   return (
-    <div className="relatorio-aluno">
+    <div className="relatorio-aluno" style={{ fontSize: `${fontSize}px` }}>
       <Header />
       <Row>
         <Col md={2}>
@@ -112,42 +114,44 @@ export default function RelatorioAluno() {
         </Col>
         <Col md={10}>
           <Container>
+            <Button onClick={increaseFontSize} variant="outline-primary" style={{ margin: '5px', fontSize: `${fontSize}px` }}>A+</Button>
+            <Button onClick={decreaseFontSize} variant="outline-secondary" style={{ margin: '5px', fontSize: `${fontSize}px` }}>A-</Button>
             <h1 className="mb-3">Relatório de Faltas do Aluno</h1>
-            <section className="filtros">
-            {errorMessage && <Alert variant="warning">{errorMessage}</Alert>}
-              <div className='seleciona-aluno'>
-                <label htmlFor="select-aluno">Selecione o aluno:</label>
-                <select id="select-aluno" className="ms-2 mb-3" onChange={handleAlunoChange}>
-                  <option value="">Selecione um aluno</option>
-                  {alunos.map(aluno => (
-                    <option key={aluno.codAluno} value={aluno.codAluno}>
-                      {`${aluno.codAluno} - ${aluno.nome}`}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className='seleciona-datas'>
-                <label htmlFor="input-dataInicial">Data inicial:</label>
-                <input
-                  type="date"
-                  id="input-dataInicial"
-                  value={dataInicial}
-                  onChange={handleDataInicialChange}
-                  className="ms-2 mb-3"
-                />
-                <label htmlFor="input-dataFinal">Data final:</label>
-                <input
-                  type="date"
-                  id="input-dataFinal"
-                  value={dataFinal}
-                  onChange={handleDataFinalChange}
-                  className="ms-2 mb-3"
-                />
-              </div>
-              <Button variant="secondary" className='w-25' onClick={handleSubmit}>Gerar relatório</Button>
-            </section>
+            {errorMessage && <Alert variant="warning" style={{ fontSize: `${fontSize}px` }}>{errorMessage}</Alert>}
+            <div className='seleciona-aluno'>
+              <label htmlFor="select-aluno">Selecione o aluno:</label>
+              <select id="select-aluno" className="ms-2 mb-3" onChange={handleAlunoChange} style={{ fontSize: `${fontSize}px` }}>
+                <option value="">Selecione um aluno</option>
+                {alunos.map(aluno => (
+                  <option key={aluno.codAluno} value={aluno.codAluno}>
+                    {`${aluno.codAluno} - ${aluno.nome}`}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='seleciona-datas'>
+              <label htmlFor="input-dataInicial">Data inicial:</label>
+              <input
+                type="date"
+                id="input-dataInicial"
+                value={dataInicial}
+                onChange={handleDataInicialChange}
+                className="ms-2 mb-3"
+                style={{ fontSize: `${fontSize}px` }}
+              />
+              <label htmlFor="input-dataFinal">Data final:</label>
+              <input
+                type="date"
+                id="input-dataFinal"
+                value={dataFinal}
+                onChange={handleDataFinalChange}
+                className="ms-2 mb-3"
+                style={{ fontSize: `${fontSize}px` }}
+              />
+            </div>
+            <Button variant="secondary" className='w-25' onClick={handleSubmit} style={{ fontSize: `${fontSize}px` }}>Gerar relatório</Button>
             {showTable && (
-              <Table bordered hover>
+              <Table bordered hover style={{ fontSize: `${fontSize}px` }}>
                 <thead>
                   <tr>
                     <th>Disciplina</th>

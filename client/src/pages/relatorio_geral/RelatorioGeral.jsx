@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-//import './RelatorioAluno.css';
+import './RelatorioGeral.css';
 import { getProfessores, getDisciplinas, getTurmas, getPresencas } from '../../api/utils';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -17,6 +17,7 @@ export default function RelatorioGeral() {
   const [showTable, setShowTable] = useState(false);
   const [relatorio, setRelatorio] = useState({}); // Adicionado estado para armazenar o relatório calculado
   const [errorMessage, setErrorMessage] = useState(''); // Estado para armazenar mensagens de erro
+  const [fontSize, setFontSize] = useState(16); 
 
   // Popula filtros
   useEffect(() => {
@@ -127,9 +128,11 @@ export default function RelatorioGeral() {
     }
   };
   
+  const increaseFontSize = () => setFontSize(fontSize + 1);
+  const decreaseFontSize = () => setFontSize(Math.max(fontSize - 1, 10));
 
   return (
-    <div className="relatorio-geral">
+    <div className="relatorio-geral" style={{ fontSize: `${fontSize}px` }}>
       <Header />
       <Row>
         <Col md={2}>
@@ -137,6 +140,8 @@ export default function RelatorioGeral() {
         </Col>
         <Col md={10}>
           <Container>
+            <Button onClick={increaseFontSize} variant="outline-primary" style={{ margin: '5px' }}>A+</Button>
+            <Button onClick={decreaseFontSize} variant="outline-secondary" style={{ margin: '5px' }}>A-</Button>
             <h1 className="mb-3">Relatório Geral de Faltas</h1>
             <section className = "filtros">
             {errorMessage && <Alert variant="warning">{errorMessage}</Alert>}
@@ -147,6 +152,7 @@ export default function RelatorioGeral() {
                 id="input-dataInicial"
                 value={dataInicial}
                 onChange={handleDataInicialChange}
+                style={{ fontSize: `${fontSize}px` }}
               />
               </div>
               <div className = "seleciona-datas">
@@ -156,11 +162,12 @@ export default function RelatorioGeral() {
                   id="input-dataFinal"
                   value={dataFinal}
                   onChange={handleDataFinalChange}
+                  style={{ fontSize: `${fontSize}px` }}
                 />
               </div>
               <div className='seleciona-professor'>
                 <label htmlFor="select-professor">Selecione o professor:</label>
-                <select id="select-professor" className="ms-2 mb-3" onChange={handleProfessorChange}>
+                <select id="select-professor" className="ms-2 mb-3" onChange={handleProfessorChange} style={{ fontSize: `${fontSize}px` }}>
                   <option value="">Selecione um professor</option>
                   {professores.map(professor => (
                     <option key={professor.nome} value={professor.nome}>
@@ -171,7 +178,7 @@ export default function RelatorioGeral() {
               </div>
               <div className='seleciona-disciplina'>
                 <label htmlFor="select-disciplina">Selecione a disciplina:</label>
-                <select id="select-disciplina" className="ms-2 mb-3" onChange={handleDisciplinaChange}>
+                <select id="select-disciplina" className="ms-2 mb-3" onChange={handleDisciplinaChange} style={{ fontSize: `${fontSize}px` }}>
                   <option value="">Selecione uma disciplina</option>
                   {disciplinas.map(disciplina => (
                     <option key={disciplina.nomeDisciplina} value={disciplina.nomeDisciplina}>
@@ -182,7 +189,7 @@ export default function RelatorioGeral() {
               </div>
               <div className='seleciona-turma'>
                 <label htmlFor="select-turma">Selecione a turma:</label>
-                <select id="select-turma" className="ms-2 mb-3" onChange={handleTurmaChange}>
+                <select id="select-turma" className="ms-2 mb-3" onChange={handleTurmaChange} style={{ fontSize: `${fontSize}px` }}>
                   <option value="">Selecione uma turma</option>
                   {turmas.map(turma => (
                     <option key={turma.anoTurma + turma.codTurma} value={turma.anoTurma + turma.codTurma}>
@@ -191,10 +198,10 @@ export default function RelatorioGeral() {
                   ))}
                 </select>
               </div>
-                <Button variant="secondary" className='w-25' onClick={handleSubmit}>Gerar relatório</Button>
+                <Button variant="secondary" className='w-25' onClick={handleSubmit} style={{ fontSize: `${fontSize}px` }}>Gerar relatório</Button>
             </section>
             {showTable && (
-              <Table>
+              <Table style={{ fontSize: `${fontSize}px` }}>
                 <thead>
                   <tr>
                     <th>Nome do Aluno</th>

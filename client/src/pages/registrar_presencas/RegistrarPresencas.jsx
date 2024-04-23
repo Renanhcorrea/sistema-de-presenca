@@ -13,6 +13,7 @@ export default function RegistrarPresencas() {
   // useState para armazenar a aula selecionada
   const [selectedAula, setSelectedAula] = useState('');
   const [showAlert, setShowAlert] = useState(false); 
+  const [fontSize, setFontSize] = useState(16); 
 
   // useEffect para buscar a lista de aulas
   useEffect(() => {
@@ -69,8 +70,11 @@ export default function RegistrarPresencas() {
     }
   };
 
+  const increaseFontSize = () => setFontSize(fontSize + 1);
+  const decreaseFontSize = () => setFontSize(Math.max(fontSize - 1, 10));
+
   return (
-    <div className="registrar-presencas">
+    <div className="registrar-presencas" style={{ fontSize: `${fontSize}px` }}>
       <Header />
       <Row>
         <Col md={2}>
@@ -78,19 +82,19 @@ export default function RegistrarPresencas() {
         </Col>
         <Col md={10}>
           <Container>
+            <Button onClick={increaseFontSize} variant="outline-primary" style={{ margin: '5px' }}>A+</Button>
+            <Button onClick={decreaseFontSize} variant="outline-secondary" style={{ margin: '5px' }}>A-</Button>
             <h1 className="mb-3">Registrar Presenças</h1>
             <label htmlFor="select-aula">Selecione a aula:</label>
-            <select id="select-aula" className="ms-2 mb-3" onChange={handleAulaChange}>
+            <select id="select-aula" className="ms-2 mb-3" onChange={handleAulaChange} style={{ fontSize: `${fontSize}px` }}>
               <option value="">Selecione uma aula</option>
-              {aulas.map(aula => {
-                return (
-                  <option key={aula.idAula} value={aula.idAula}>
-                    {`${aula.nomeDisciplina} - ${aula.horaInicio} às ${aula.horaFim} - ${aula.anoTurma}${aula.codTurma}`}
-                  </option>
-                );
-              })}
+              {aulas.map(aula => (
+                <option key={aula.idAula} value={aula.idAula}>
+                  {`${aula.nomeDisciplina} - ${aula.horaInicio} às ${aula.horaFim} - ${aula.anoTurma}${aula.codTurma}`}
+                </option>
+              ))}
             </select>
-            <Table bordered hover>
+            <Table bordered hover style={{ fontSize: `${fontSize}px` }}>
               <thead>
                 <tr>
                   <th>Nome</th>
@@ -103,17 +107,17 @@ export default function RegistrarPresencas() {
                   <tr key={aluno.codAluno}>
                     <td>{aluno.nome}</td>
                     <td>{aluno.codAluno}</td>
-                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" style={{ fontSize: `${fontSize}px` }}/></td>
                   </tr>
                 ))}
               </tbody>
             </Table>
             {showAlert && (
-              <Alert variant="warning">
+              <Alert variant="warning" style={{ fontSize: `${fontSize}px` }}>
                 Registre a presença de pelo menos um aluno.
               </Alert>
             )}
-              <Button variant="secondary" type="submit" className='w-25' onClick={marcarPresencas}>Marcar Presenças</Button>
+            <Button variant="secondary" type="submit" className='w-25' onClick={marcarPresencas} style={{ fontSize: `${fontSize}px` }}>Marcar Presenças</Button>
           </Container>
         </Col>
       </Row>
