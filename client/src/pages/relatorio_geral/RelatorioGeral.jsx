@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getProfessores, getDisciplinas, getTurmas, getPresencas } from '../../api/utils';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
-import { Container, Row, Col, Table, Button } from 'react-bootstrap';
+import { Container, Row, Col, Table, Button, Alert } from 'react-bootstrap';
 
 export default function RelatorioGeral() {
   const [dataInicial, setDataInicial] = useState('')
@@ -16,6 +16,7 @@ export default function RelatorioGeral() {
   const [selectedTurma, setSelectedTurma] = useState('');
   const [showTable, setShowTable] = useState(false);
   const [relatorio, setRelatorio] = useState({}); // Adicionado estado para armazenar o relatório calculado
+  const [errorMessage, setErrorMessage] = useState(''); // Estado para armazenar mensagens de erro
 
   // Popula filtros
   useEffect(() => {
@@ -54,62 +55,76 @@ export default function RelatorioGeral() {
   const handleProfessorChange = (event) => {
     setSelectedProfessor(event.target.value);
     setShowTable(false); // Resetar a exibição da tabela quando o professor é alterado
+    setErrorMessage(''); // Limpar mensagens de erro ao mudar a seleção
   };
 
   const handleDisciplinaChange = (event) => {
     setSelectedDisciplina(event.target.value);
     setShowTable(false); // Resetar a exibição da tabela quando a disciplina é alterada
+    setErrorMessage(''); // Limpar mensagens de erro ao mudar a seleção
   };
   
   const handleTurmaChange = (event) => {
     setSelectedTurma(event.target.value);
     setShowTable(false); // Resetar a exibição da tabela quando a disciplina é alterada
+    setErrorMessage(''); // Limpar mensagens de erro ao mudar a seleção
   };
 
   const handleDataInicialChange = (event) => {
     setDataInicial(event.target.value);
+    setErrorMessage(''); // Limpar mensagens de erro ao mudar a seleção
   };
 
   const handleDataFinalChange = (event) => {
     setDataFinal(event.target.value);
+    setErrorMessage(''); // Limpar mensagens de erro ao mudar a seleção
   };
 
   const handleSubmit = async () => {
-    const presencasData = await getPresencas();
-    const relatorioFiltrado = presencasData
-      .filter(presenca => {
-        // Filtra por disciplina
-        const filtroDisciplina = selectedDisciplina ? presenca.nomeDisciplina === selectedDisciplina : true;
-        // Filtra por professor
-        const filtroProfessor = selectedProfessor ? presenca.nomeProf === selectedProfessor : true;
-        // Filtra por turma
-        const filtroTurma = selectedTurma ? presenca.turma === selectedTurma : true;
-        // Filtra por data
-        const dataAula = new Date(presenca.dataAula);
-        const filtroData = dataInicial && dataFinal ? (dataAula >= new Date(dataInicial) && dataAula <= new Date(dataFinal)) : true;
-        
-        return filtroDisciplina && filtroProfessor && filtroTurma && filtroData;
-      })
-      .reduce((acc, presenca) => {
-        const chave = presenca.nomeAluno;
-        if (!acc[chave]) {
-          acc[chave] = { totalAulas: 0, presencas: 0 };
-        }
-        acc[chave].totalAulas++;
-        if (presenca.presente) {
-          acc[chave].presencas++;
-        }
-        return acc;
-      }, {});
-    
-    const relatorioCalculado = Object.entries(relatorioFiltrado).map(([nomeAluno, dados]) => ({
-      nomeAluno,
-      faltas: dados.totalAulas - dados.presencas,
-      frequencia: (dados.presencas / dados.totalAulas * 100).toFixed(2) + '%'
-    }));
+    if (!selectedProfessor || !selectedDisciplina || !selectedTurma || !dataInicial || !dataFinal) {
+      setErrorMessage('Todos os campos são obrigatórios.');
+      setShowTable(false);
+    } else if (new Date(dataInicial) >= new Date(dataFinal)) {
+      setErrorMessage('A data inicial deve ser menor que a data final.');
+      setShowTable(false);
+    } else {
+      const presencasData = await getPresencas();
+      const relatorioFiltrado = presencasData
+        .filter(presenca => {
+          // Filtra por disciplina
+          const filtroDisciplina = selectedDisciplina ? presenca.nomeDisciplina === selectedDisciplina : true;
+          // Filtra por professor
+          const filtroProfessor = selectedProfessor ? presenca.nomeProf === selectedProfessor : true;
+          // Filtra por turma
+          const filtroTurma = selectedTurma ? presenca.turma === selectedTurma : true;
+          // Filtra por data
+          const dataAula = new Date(presenca.dataAula);
+          const filtroData = dataInicial && dataFinal ? (dataAula >= new Date(dataInicial) && dataAula <= new Date(dataFinal)) : true;
+          
+          return filtroDisciplina && filtroProfessor && filtroTurma && filtroData;
+        })
+        .reduce((acc, presenca) => {
+          const chave = presenca.nomeAluno;
+          if (!acc[chave]) {
+            acc[chave] = { totalAulas: 0, presencas: 0 };
+          }
+          acc[chave].totalAulas++;
+          if (presenca.presente) {
+            acc[chave].presencas++;
+          }
+          return acc;
+        }, {});
+      
+      const relatorioCalculado = Object.entries(relatorioFiltrado).map(([nomeAluno, dados]) => ({
+        nomeAluno,
+        faltas: dados.totalAulas - dados.presencas,
+        frequencia: (dados.presencas / dados.totalAulas * 100).toFixed(2) + '%'
+      }));
 
-    setRelatorio(relatorioCalculado);
-    setShowTable(true);
+      setRelatorio(relatorioCalculado);
+      setShowTable(true);
+      setErrorMessage('');
+    }
   };
   
 
@@ -124,6 +139,7 @@ export default function RelatorioGeral() {
           <Container>
             <h1 className="mb-3">Relatório Geral de Faltas</h1>
             <section className = "filtros">
+            {errorMessage && <Alert variant="warning">{errorMessage}</Alert>}
               <div className='seleciona-datas'>
               <label htmlFor="input-dataInicial">Data inicial:</label>
               <input className="ms-2 mb-3"

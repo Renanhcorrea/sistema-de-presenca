@@ -3,7 +3,7 @@ import './RegistrarPresencas.css';
 import { getAulasByProfessor, getAlunosByTurma, setPresenca, getDisciplinas } from '../../api/utils';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
-import { Container, Row, Col, Table, Button } from 'react-bootstrap';
+import { Container, Row, Col, Table, Button, Alert } from 'react-bootstrap';
 
 export default function RegistrarPresencas() {
   // useState para armazenar a lista de aulas
@@ -12,6 +12,7 @@ export default function RegistrarPresencas() {
   const [alunos, setAlunos] = useState([]);
   // useState para armazenar a aula selecionada
   const [selectedAula, setSelectedAula] = useState('');
+  const [showAlert, setShowAlert] = useState(false); 
 
   // useEffect para buscar a lista de aulas
   useEffect(() => {
@@ -49,23 +50,24 @@ export default function RegistrarPresencas() {
 
   // Função para marcar as presenças
   const marcarPresencas = () => {
-     // Exibe a caixa de confirmação
-    const confirmacao = confirm('Deseja confirmar o envio das faltas e presenças marcadas?');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const isAnyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
 
-      if (confirmacao) {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if (!isAnyChecked) {
+      setShowAlert(true); // Ativar o alerta se nenhum checkbox estiver marcado
+      setTimeout(() => setShowAlert(false), 5000); // Desativar o alerta após 5 segundos
+      return; // Parar a execução da função aqui
+    }
+
+    const confirmacao = confirm('Deseja confirmar o envio das faltas e presenças marcadas?');
+    if (confirmacao) {
       checkboxes.forEach((checkbox, index) => {
         setPresenca(alunos[index].codAluno, selectedAula, checkbox.checked);
       });
-      
-      // Exibe uma mensagem de sucesso e redireciona
       alert('Presenças marcadas com sucesso!');
       window.location.href = "/";
-    } else {
-      // Se o usuário não confirmar, apenas fecha a mensagem
-      // Não é necessário fazer mais nada aqui
     }
-};
+  };
 
   return (
     <div className="registrar-presencas">
@@ -106,6 +108,11 @@ export default function RegistrarPresencas() {
                 ))}
               </tbody>
             </Table>
+            {showAlert && (
+              <Alert variant="warning">
+                Registre a presença de pelo menos um aluno.
+              </Alert>
+            )}
               <Button variant="secondary" type="submit" className='w-25' onClick={marcarPresencas}>Marcar Presenças</Button>
           </Container>
         </Col>

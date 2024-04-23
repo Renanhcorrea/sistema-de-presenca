@@ -2,6 +2,7 @@ import './Sidebar.css';
 import professor_foto from '../../assets/professor.png';
 import { useEffect, useState } from 'react';
 import { getProfessor } from '../../api/utils';
+import React from 'react';
 
 export default function Sidebar() {
   const [professor, setProfessor] = useState({});
