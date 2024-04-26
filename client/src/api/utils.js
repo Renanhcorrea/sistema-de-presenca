@@ -1,6 +1,6 @@
 import axios from 'axios';
-//const API_URL = 'http://15.228.148.167:3000';
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://15.228.148.167:3000';
+//const API_URL = 'http://localhost:3000'
 const codProfessor = 'P002';
 
 export const getProfessor = async () => {
