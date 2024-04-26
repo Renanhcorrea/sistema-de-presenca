@@ -201,7 +201,7 @@ export default function RelatorioGeral() {
                 <Button variant="secondary" className='w-25' onClick={handleSubmit} style={{ fontSize: `${fontSize}px` }}>Gerar relatório</Button>
             </section>
             {showTable && (
-              <Table style={{ fontSize: `${fontSize}px` }}>
+              <Table bordered hover style={{ fontSize: `${fontSize}px` }}>
                 <thead>
                   <tr>
                     <th>Nome do Aluno</th>
