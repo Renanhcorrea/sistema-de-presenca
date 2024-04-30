@@ -12,6 +12,8 @@ Medidas de segurança do site, além da proteção por senha, não fazem parte d
 
 # Passo a Passo para execução local
 
+Antes de executar, é necessário ter instalado o node.js e, caso deseje simular o banco de dados em que o projeto foi baseado, o MySQL Workbench.
+
 Após fazer o download do arquivo do projeto e extrair os arquivos, siga os passos a seguir para executar o sistema.
 
 ## Criando o Banco de Dados de desenvolvimento/testes
